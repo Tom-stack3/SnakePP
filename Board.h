@@ -1,9 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#define DEFAULT_WIDTH 20
-#define DEFAULT_HEIGHT 10
-
 #include "Directions.h"
 #include <iostream>
 

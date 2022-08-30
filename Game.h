@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "Snake.h"
 #include "kbhit.h"
+#include "Config.h"
 #include <vector>
 
 class Game
@@ -11,7 +12,7 @@ class Game
 private:
     Board m_board;
     Snake m_snake;
-    // Vector of empty cubes
+    // List of empty cubes
     std::list<int> m_blankIndexes;
     // Index of food cube
     int m_food_index;
@@ -21,7 +22,6 @@ private:
     }
     bool m_is_alive;
     bool m_did_quit;
-    int m_max_input_wait_ms;
     void createFood();
     bool hasFood(int x, int y);
     bool hasFood(int index);

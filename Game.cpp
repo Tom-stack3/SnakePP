@@ -29,7 +29,7 @@ void Game::draw()
         std::cout << "|";
         for (j = 0; j < getBoard().getWidth(); j++)
         {
-            std::cout << (m_snake.has(j, i) ? "@" : (hasFood(j, i) ? "*" : " "));
+            std::cout << (m_snake.has(j, i) ? SNAKE_BODY_SYM : (hasFood(j, i) ? FOOD_SYM : EMPTY_SYM));
         }
         std::cout << "|" << std::endl;
     }
@@ -80,7 +80,6 @@ void sleepcp(int mil)
 Game::Game(Board &board, Snake &snake) : m_board(board), m_snake(snake), m_is_alive(true), m_did_quit(false)
 {
     createFood();
-    m_max_input_wait_ms = 50;
 }
 
 void Game::createFood()
@@ -102,7 +101,7 @@ void Game::getInput()
     keyboard keyb;
     unsigned int in_wait = 20, waited = 0;
     DIRECTION dir = -1;
-    while (waited < m_max_input_wait_ms)
+    while (waited < MAX_KEYBOARD_INPUT_WAIT_TIME_MS)
     {
         // If keyboard was hit
         if (keyb.kbhit())
@@ -155,19 +154,21 @@ void Game::play()
     // Randomize the seed
     srand((unsigned int)time(0));
 
-    Board board(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    Board board(DEFAULT_BOARD_WIDTH, DEFAULT_BOARD_HEIGHT);
+    // Snake starts in the middle of the board
     int start_x = board.getWidth() / 2;
     int start_y = board.getHeight() / 2;
     Snake snake(board, start_x, start_y);
     snake.setDirection(DOWN);
     Game game(board, snake);
+    // Game loop
     while (game.isLive())
     {
         game.getInput();
         game.nextStep();
         game.draw();
         playing++;
-        sleepcp(100);
+        sleepcp(SLEEP_BETWEEN_FRAMES_MS);
     }
 }
 
