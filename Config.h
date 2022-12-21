@@ -1,8 +1,10 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define SNAKE_BODY_SYM "@"
-#define FOOD_SYM "#"
+#include "colors.h"
+
+#define SNAKE_BODY_SYM C_DARK_GREEN "@" C_DEFAULT
+#define FOOD_SYM C_DARK_RED "#" C_DEFAULT
 #define EMPTY_SYM " "
 
 #define DEFAULT_BOARD_WIDTH 20
