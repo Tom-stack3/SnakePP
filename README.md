@@ -5,8 +5,6 @@ Snake, written in C++.
 # Clone the repository
 git clone https://github.com/Tom-stack3/SnakePP.git
 cd SnakePP
-# Compile
-make
-# Run
-./snake
+make # Compile
+./snake # Run
 ```
