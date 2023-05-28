@@ -29,7 +29,12 @@ void Game::draw()
         std::cout << "|";
         for (j = 0; j < getBoard().getWidth(); j++)
         {
-            std::cout << (m_snake.has(j, i) ? SNAKE_BODY_SYM : (hasFood(j, i) ? FOOD_SYM : EMPTY_SYM));
+            if (m_snake.has(j, i))
+                std::cout << (m_is_colored ? SNAKE_BODY_SYM : SNAKE_BODY_SYM_NO_COLOR);
+            else if (hasFood(j, i))
+                std::cout << (m_is_colored ? FOOD_SYM : FOOD_SYM_NO_COLOR);
+            else
+                std::cout << EMPTY_SYM;
         }
         std::cout << "|" << std::endl;
     }
@@ -77,7 +82,7 @@ void sleepcp(int mil)
     }
 }
 
-Game::Game(Board &board, Snake &snake) : m_board(board), m_snake(snake), m_is_alive(true), m_did_quit(false)
+Game::Game(Board &board, Snake &snake, bool is_colored) : m_board(board), m_snake(snake), m_is_alive(true), m_did_quit(false), m_is_colored(is_colored)
 {
     createFood();
 }
@@ -160,7 +165,13 @@ void Game::play()
     int start_y = board.getHeight() / 2;
     Snake snake(board, start_x, start_y);
     snake.setDirection(DOWN);
-    Game game(board, snake);
+    // Check for NO_COLOR env
+    char *no_color = getenv("NO_COLOR");
+    bool is_colored = true;
+    if (no_color != NULL && no_color[0] != '\0')
+        is_colored = false;
+    // Create game
+    Game game(board, snake, is_colored);
     // Game loop
     while (game.isLive())
     {

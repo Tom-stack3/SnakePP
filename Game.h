@@ -22,12 +22,13 @@ private:
     }
     bool m_is_alive;
     bool m_did_quit;
+    bool m_is_colored;
     void createFood();
     bool hasFood(int x, int y);
     bool hasFood(int index);
 
 public:
-    Game(Board &board, Snake &snake);
+    Game(Board &board, Snake &snake, bool is_colored);
     void draw();
     void nextStep();
     bool isLive()
