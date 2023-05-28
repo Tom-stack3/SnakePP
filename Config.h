@@ -5,6 +5,9 @@
 
 #define SNAKE_BODY_SYM C_DARK_GREEN "@" C_DEFAULT
 #define FOOD_SYM C_DARK_RED "#" C_DEFAULT
+#define SNAKE_BODY_SYM_NO_COLOR "@"
+#define FOOD_SYM_NO_COLOR "#"
+
 #define EMPTY_SYM " "
 
 #define DEFAULT_BOARD_WIDTH 20
